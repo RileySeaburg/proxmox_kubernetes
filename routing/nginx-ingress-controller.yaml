@@ -18,27 +18,17 @@ metadata:
   resourceVersion: "72092"
   uid: ae7f6d7e-319c-416b-ba2e-2e96820fc85d
 spec:
-  clusterIP: 10.233.37.130
-  clusterIPs:
-  - 10.233.37.130
-  externalTrafficPolicy: Cluster
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
+  type: LoadBalancer
+  externalTrafficPolicy: Local
   ports:
-  - appProtocol: http
-    name: http
-    nodePort: 32206
-    port: 80
-    protocol: TCP
-    targetPort: http
-  - appProtocol: https
-    name: https
-    nodePort: 32415
-    port: 443
-    protocol: TCP
-    targetPort: https
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: https
   selector:
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: ingress-nginx
