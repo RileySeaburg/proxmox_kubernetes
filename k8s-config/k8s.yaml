@@ -1,0 +1,35 @@
+cluster_name: k8s-cluster
+kube_version: v1.27.7
+# Ensures kube-proxy doesn't respond to ARP queries for Service IPs.
+kube_proxy_strict_arp: true
+
+# Enables MetalLB and its speaker component.
+metallb_enabled: true
+metallb_speaker_enabled: true
+
+metallb_config:
+  # Define address pools
+  address_pools:
+    primary:
+      ip_range:
+        - 192.168.50.224-192.168.50.254
+    pool1:
+      ip_range:
+        - 192.168.50.201-192.168.50.223
+      auto_assign: true # Requires explicit loadBalancerIP to be set in the service.
+    pool2:
+      ip_range:
+        - 192.168.50.180-192.168.50.191
+      avoid_buggy_ips: true # Avoids .0 and .255 addresses.
+
+  # Configuring pools for Layer2 mode
+  layer2:
+    - primary
+    - pool1
+    - pool2
+
+# Cert manager deployment
+cert_manager_enabled: true
+
+# Nginx ingress controller deployment
+ingress_nginx_enabled: true

@@ -1,0 +1,7 @@
+kubespray/
+kubespray-venv/
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+vars.tf
+.terraform.lock.hcl
